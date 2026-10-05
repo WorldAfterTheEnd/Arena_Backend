@@ -23,3 +23,5 @@ try {
     die("FATAL ERROR: Gagal terhubung ke Database! " . $e->getMessage());
 }
 ?>
+
+// abi nega love orang hitam

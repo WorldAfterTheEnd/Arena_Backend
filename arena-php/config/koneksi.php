@@ -25,3 +25,5 @@ try {
 ?>
 
 // abi nega love orang hitam
+
+// abi suka kepiting

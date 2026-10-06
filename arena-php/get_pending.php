@@ -10,7 +10,7 @@ if (!isset($_SESSION['id_user'])) {
 }
 
 $role = $_SESSION['role'];
-$approver_roles = ['DosPem', 'Kajur', 'Wadir', 'PresBEM']; // Daftar role yang boleh ACC
+$approver_roles = ['DosPem', 'PresBEM', 'Kajur', 'Wadir'];
 
 if (!in_array($role, $approver_roles)) {
     http_response_code(403);
@@ -19,17 +19,20 @@ if (!in_array($role, $approver_roles)) {
 }
 
 try {
-    // 2. AMBIL DATA PENDING DENGAN JOIN
+    // 2. QUERY SEKUENSIAL: Hanya tampilkan data yang posisinya ada di role yang sedang login
+    // Dan pastikan status akhirnya belum Approved/Rejected (masih berjalan)
     $sql = "SELECT r.id_reservasi, u.nama_lengkap AS nama_pemohon, g.nama_gedung, 
-                   r.nama_acara, r.tgl_acara, r.jam_mulai, r.jam_selesai, r.status_akhir 
+                   r.nama_acara, r.tgl_acara, r.jam_mulai, r.jam_selesai, r.posisi_approval, r.status_akhir 
             FROM reservasi r
             JOIN users u ON r.id_user = u.id_user
             JOIN gedung_fasilitas g ON r.id_gedung = g.id_gedung
-            WHERE r.status_akhir = 'Pending'
+            WHERE r.posisi_approval = :role_sekarang 
+            AND r.status_akhir IN ('Pending', 'In-Progress')
             ORDER BY r.tgl_acara ASC";
             
     $stmt = $pdo->prepare($sql);
-    $stmt->execute();
+    $stmt->execute([':role_sekarang' => $role]); // Filter data sesuai jabatan/role
+    
     $data_pending = $stmt->fetchAll();
 
     echo json_encode([

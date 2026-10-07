@@ -1,7 +1,7 @@
 <?php
 session_start();
 header('Content-Type: application/json');
-require_once 'config/koneksi.php'; 
+require_once '../../config/koneksi.php'; 
 
 // 1. GERBANG OTORISASI & ROLE
 if (!isset($_SESSION['id_user'])) {

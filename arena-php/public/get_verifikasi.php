@@ -1,7 +1,7 @@
 <?php
 // Tidak perlu session_start() karena ini API Publik untuk cek keaslian
 header('Content-Type: application/json');
-require_once 'config/koneksi.php';
+require_once '../config/koneksi.php';
 
 // Menangkap parameter 'id' dari URL (contoh: get_verifikasi.php?id=1234-5678)
 $id_reservasi = $_GET['id'] ?? '';

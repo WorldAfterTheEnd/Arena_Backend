@@ -6,7 +6,7 @@ session_start();
 header('Content-Type: application/json');
 
 // 3. Memanggil jembatan koneksi database yang tadi sukses
-require_once 'config/koneksi.php'; 
+require_once '../../config/koneksi.php'; 
 
 // Hapus/komen tulisan echo "SUKSES..." di file koneksi.php agar tidak ikut tercetak di JSON
 // echo "SUKSES: PHP Native berhasil..."; -> // echo "SUKSES: PHP Native berhasil...";

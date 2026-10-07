@@ -1,7 +1,7 @@
 <?php
 session_start();
 header('Content-Type: application/json');
-require_once 'config/koneksi.php';
+require_once '../../config/koneksi.php';
 
 if (!isset($_SESSION['id_user'])) {
     echo json_encode(["status" => "error", "message" => "Anda belum login!"]);

@@ -1,5 +1,5 @@
 <?php
-require_once 'config/koneksi.php';
+require_once '../config/koneksi.php';
 
 $id_reservasi = $_GET['id'] ?? '';
 $data = null;
